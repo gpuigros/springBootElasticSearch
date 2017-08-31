@@ -2,6 +2,7 @@ package com.puigros.ws.controller;
 
 import com.puigros.dto.HotelDTO;
 import com.puigros.elastic.dto.Hotel;
+import com.puigros.elastic.dto.Room;
 import com.puigros.service.ElasticService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
@@ -62,9 +63,18 @@ public class ElasticRestController {
     ) {
 
         Hotel hot=new Hotel();
-        hot.setId(hotelDTO.getId());
+        //hot.setId(hotelDTO.getId());
         hot.setGiata(hotelDTO.getGiata());
         hot.setName(hotelDTO.getName());
+        hot.setRooms(new ArrayList<>());
+        Room room = new Room();
+        room.setType("SC1");
+        room.setDesciption("Des1");
+        hot.getRooms().add(room);
+        room = new Room();
+        room.setType("SC1");
+        room.setDesciption("Des1");
+        hot.getRooms().add(room);
         service.save(hot);
 
         return new ResponseEntity<>(HttpStatus.OK);
